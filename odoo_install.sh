@@ -43,9 +43,9 @@ else
             verzija=`cat /etc/mandrake-release | sed s/.*release\ // | sed s/\ .*//`
         elif [ -f /etc/debian_version ] ; then
             distro_baziran_na='Debian'
-            distro=`cat /etc/lsb-release | grep '^DISTRIB_ID' | awk -F=  '{ print $2 }'`
-            code_name=`cat /etc/lsb-release | grep '^DISTRIB_CODENAME' | awk -F=  '{ print $2 }'`
-            verzija=`cat /etc/lsb-release | grep '^DISTRIB_RELEASE' | awk -F=  '{ print $2 }'`
+            distro=`cat /etc/*release | grep '^NAME' | awk -F=  '{ print $2 }' | tr -d '"' | tr -d '/'`
+            code_name=`cat /etc/*release | grep '^DISTRIB_CODENAME' | awk -F=  '{ print $2 }'`
+            verzija=`cat /etc/*release | grep '^DISTRIB_RELEASE' | awk -F=  '{ print $2 }'`
         fi
         if [ -f /etc/UnitedLinux-release ] ; then
             distro="${distro}[`cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//`]"
@@ -258,9 +258,9 @@ sudo yum install epel-release wget git gcc libxslt-devel bzip2-devel openldap-de
 echo -e "\n--- Installing Python --"
 
 sudo yum install python-pip -y
-sudo pip install --upgrade pip
+#sudo pip install --upgrade pip
 sudo pip install --upgrade setuptools
-#sudo pip install Babel decorator docutils ebaysdk feedparser gevent greenlet jcconv Jinja2 lxml Mako MarkupSafe mock ofxparse passlib Pillow psutil psycogreen psycopg2-binary pydot pyparsing pyPdf pyserial Python-Chart python-dateutil python-ldap python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug wsgiref XlsxWriter xlwt xlrd
+sudo pip install Babel decorator docutils ebaysdk feedparser gevent greenlet jcconv Jinja2 lxml Mako MarkupSafe mock ofxparse passlib Pillow psutil psycogreen psycopg2-binary pydot pyparsing pyPdf pyserial Python-Chart python-dateutil python-ldap python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug wsgiref XlsxWriter xlwt xlrd
 sudo pip install -r https://github.com/odoo/odoo/raw/$ODOO_VERSION/requirements.txt
 
 sudo yum install python36 -y
@@ -268,8 +268,8 @@ sudo yum install python36 -y
 echo -e "\n---- Install python packages ----"
 
 sudo yum install python36-devel libxslt-devel libxml2-devel openldap-devel python36-setuptools python-devel -y
-python3.6 -m ensurepip
-#sudo pip3 install pypdf2 Babel passlib Werkzeug decorator python-dateutil pyyaml psycopg2-binary psutil html2text docutils lxml pillow reportlab ninja2 requests gdata XlsxWriter vobject python-openid pyparsing pydot mock mako Jinja2 ebaysdk feedparser xlwt psycogreen suds-jurko pytz pyusb greenlet xlrd num2words
+sudo python3.6 -m ensurepip
+sudo pip3 install pypdf2 Babel passlib Werkzeug decorator python-dateutil pyyaml psycopg2-binary psutil html2text docutils lxml pillow reportlab ninja2 requests gdata XlsxWriter vobject python-openid pyparsing pydot mock mako Jinja2 ebaysdk feedparser xlwt psycogreen suds-jurko pytz pyusb greenlet xlrd num2words
 sudo pip3 install -r https://github.com/odoo/odoo/raw/$ODOO_VERSION/requirements.txt
 
 echo -e "\n--- Install other required packages"
@@ -701,7 +701,7 @@ if [ "$ODOO_INSTALL" = y ] || [ "$ODOO_INSTALL" = Y ] || [ "$distro" = "CentOS L
     then
         install_odoo_centos
 else
-    if [ "$ODOO_INSTALL" = y ] || [ "$ODOO_INSTALL" = Y ] || [ "$distro" = "Ubuntu" ] || [ "$distro" = "Debian" ]; then
+    if [ "$ODOO_INSTALL" = y ] || [ "$ODOO_INSTALL" = Y ] || [ "$distro" = "Ubuntu" ] || [ "$distro" = "Debian GNULinux" ]; then
         install_odoo_ubuntu
     else
                     echo "This script is not supported for your OS"
