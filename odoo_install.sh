@@ -83,10 +83,9 @@ echo
 echo -e "You have selected the ${BLUE}$ODOO_USER${NC} as username"
 echo ""
 
-echo -n "Insert Odoo location (default: /opt/$ODOO_USER): "
 read LOCATION
 
-LOCATION="${LOCATION:-/opt/$ODOO_USER"
+LOCATION="${LOCATION:-/opt}"
 
   if  [[ $LOCATION == / ]] || [[ $LOCATION == /* ]] ;
     then
