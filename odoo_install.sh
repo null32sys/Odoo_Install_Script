@@ -86,7 +86,7 @@ echo ""
 echo -n "Insert Odoo location (default: /opt/$ODOO_USER): "
 read LOCATION
 
-LOCATION="${LOCATION:-/opt}"
+LOCATION="${LOCATION:-/opt/"
 
   if  [[ $LOCATION == / ]] || [[ $LOCATION == /* ]] ;
     then
@@ -220,7 +220,7 @@ read -s ODOO_MASTER_PASSWD
 echo
 
 ODOO_HOME_EXT="$ODOO_HOME/$ODOO_USER"
-ODOO_CONFIG="/etc/$ODOO_USER/$ODOO_USER-server.conf"
+ODOO_CONFIG="/etc/$ODOO_USER/$ODOO_USER.conf"
 INSTALL_WKHTMLTOPDF="True"
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
@@ -379,7 +379,7 @@ sudo su root -c "echo 'SyslogIdentifier=odoo12' >> /etc/systemd/system/$ODOO_USE
 sudo su root -c "echo 'PermissionsStartOnly=true' >> /etc/systemd/system/$ODOO_USER.service"
 sudo su root -c "echo 'User=$ODOO_USER' >> /etc/systemd/system/$ODOO_USER.service"
 sudo su root -c "echo 'Group=$ODOO_USER' >> /etc/systemd/system/$ODOO_USER.service"
-sudo su root -c "echo 'ExecStart=$ODOO_HOME/$ODOO_USER/odoo-bin -c /etc/$ODOO_USER/$ODOO_USER-server.conf' >> /etc/systemd/system/$ODOO_USER.service"
+sudo su root -c "echo 'ExecStart=$ODOO_HOME/$ODOO_USER/odoo-bin -c /etc/$ODOO_USER/$ODOO_USER.conf' >> /etc/systemd/system/$ODOO_USER.service"
 sudo su root -c "echo 'StandardOutput=journal+console' >> /etc/systemd/system/$ODOO_USER.service"
 sudo su root -c "echo "[Install]" >> /etc/systemd/system/$ODOO_USER.service"
 sudo su root -c "echo 'WantedBy=multi-user.target' >> /etc/systemd/system/$ODOO_USER.service"
