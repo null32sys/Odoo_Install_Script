@@ -86,7 +86,7 @@ echo ""
 echo -n "Insert Odoo location (default: /opt/$ODOO_USER): "
 read LOCATION
 
-LOCATION="${LOCATION:-/opt/"
+LOCATION="${LOCATION:-/opt}"
 
   if  [[ $LOCATION == / ]] || [[ $LOCATION == /* ]] ;
     then
